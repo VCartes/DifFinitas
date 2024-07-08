@@ -3,25 +3,19 @@ h = 1 / intervalos;
 n = intervalos - 1;
 
 [X, Y] = meshgrid(0 : h : 1);
-
 Z = zeros(size(X));
-Z(:, 1) = f1;
-Z(end, :) = f2;
-Z(:, end) = f3;
-Z(1, :) = f4;
 
-Z(2 : end-1, 2 : end-1) = reshape(sol, [n, n]);
+% Incluir datos de frontera
+Z(1, :) = f1;
+Z(:, end) = f2;
+Z(end, :) = f3;
+Z(:, 1) = f4;
 
-% surf(X, Y, Z, EdgeColor="none");
-surf(X, Y, Z);
+% Incluir datos del interior del conjunto, es necesario trasponer
+% debido a la forma del vector de incógnitas
+Z(2 : end-1, 2 : end-1) = reshape(sol, [n, n])';
 
-% % figure
-% hold on
-% g = @(x, y) exp(pi * y) .* cos(pi * x) + 20 * exp(-pi * y) .* cos(pi * x);
-% U = g(X, Y);
-% %surf(X, Y, U);
-% hold off
-% 
-% max(max(abs(Z - U)))
+% Plot de la gráfica
+surf(X, Y, Z, EdgeAlpha=0);
 
 end
