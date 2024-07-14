@@ -17,5 +17,4 @@ Z(2 : end-1, 2 : end-1) = reshape(sol, [n, n])';
 
 % Plot de la gráfica
 surf(X, Y, Z, EdgeAlpha=0);
-
 end

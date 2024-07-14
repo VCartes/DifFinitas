@@ -1,9 +1,8 @@
 function ret = debe_parar(u, b, intervalos)
 h = 1 / intervalos;
-condA = 16 * sin(pi * h)^2;
-normAinv = 8 * sin(pi * h / 2)^2;
+condA = cos(pi * h / 2)^2 / sin(pi * h / 2)^2;
+normAinv = 1 / (8 * sin(pi * h / 2)^2);
 
-% A = gen_matriz(intervalos);
 Au = aplicar_matriz(u, intervalos);
 
 norma_resta = norm(b - Au);
@@ -12,8 +11,6 @@ prod1 = normAinv * norma_resta;
 prod2 = condA * norma_resta / norm(b);
 
 ret = prod1 <= 1e-8 || prod2 <= 1e-8;
-
-% max(abs(Au - A*u))
 end
 
 
